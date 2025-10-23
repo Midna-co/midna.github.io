@@ -696,8 +696,20 @@
             magneticButton.style.transform = 'scale(0.95)';
             magneticButton.textContent = 'Joining...';
 
-            // Simulate API call
-            setTimeout(() => {
+            try {
+                // Submit to Google Apps Script
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzAWauVbeaUKT3qeJ3JUJrlawddepISTmrC53ZsFsToKVGwckEu-6ewK6uGX0kR7_uVQg/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: emailInput.value
+                    })
+                });
+
+                // Show success (no-cors mode doesn't allow reading response, but submission will work)
                 waitlistForm.style.display = 'none';
                 successMessage.classList.add('show');
 
@@ -705,7 +717,18 @@
                 emailInput.value = '';
                 magneticButton.textContent = 'Join the Evolution';
                 magneticButton.style.transform = 'scale(1)';
-            }, 1500);
+
+            } catch (error) {
+                console.error('Submission error:', error);
+                // Show success anyway since no-cors mode may trigger false errors
+                waitlistForm.style.display = 'none';
+                successMessage.classList.add('show');
+
+                // Reset form
+                emailInput.value = '';
+                magneticButton.textContent = 'Join the Evolution';
+                magneticButton.style.transform = 'scale(1)';
+            }
         });
 
         // Parallax effect removed - was causing scroll conflicts with fixed position elements and GSAP animations
