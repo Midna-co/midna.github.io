@@ -730,6 +730,40 @@
                 transform: scale(0.98);
                 opacity: 0.95;
             }
+
+            /* Modal Mobile Styles */
+            .modal-container {
+                padding: 2rem 1.5rem;
+                width: 95%;
+                max-height: 85vh;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .modal-input {
+                padding: 0.875rem 1.25rem;
+                font-size: 0.95rem;
+            }
+
+            .modal-submit-button {
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .modal-close {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -915,6 +949,249 @@
         @keyframes shimmer {
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(31, 31, 36, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            position: relative;
+            background: rgba(244, 243, 247, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 243, 247, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Modal Close Button */
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: rgba(244, 243, 247, 0.7);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--cosmic-pink);
+            transform: rotate(90deg);
+        }
+
+        /* Modal Title */
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--iridescent-lilac), var(--cosmic-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            font-size: 1rem;
+            color: rgba(244, 243, 247, 0.7);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Modal Form */
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(244, 243, 247, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(244, 243, 247, 0.2);
+            border-radius: 50px;
+            color: var(--pearl-white);
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-input::placeholder {
+            color: rgba(244, 243, 247, 0.5);
+        }
+
+        .modal-input:focus {
+            border-color: var(--iridescent-lilac);
+            background: rgba(244, 243, 247, 0.08);
+        }
+
+        .modal-input.error {
+            border-color: #ff4444;
+            animation: shake 0.3s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Interests Section */
+        .interests-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .interests-label {
+            font-size: 1rem;
+            color: var(--pearl-white);
+            font-weight: 400;
+        }
+
+        .required-note {
+            font-size: 0.85rem;
+            color: rgba(244, 243, 247, 0.6);
+            font-weight: 300;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(244, 243, 247, 0.03);
+            border: 1px solid rgba(244, 243, 247, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-label:hover {
+            background: rgba(244, 243, 247, 0.06);
+            border-color: rgba(216, 180, 226, 0.3);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(244, 243, 247, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .checkbox-label input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, var(--iridescent-lilac), var(--cosmic-pink));
+            border-color: var(--iridescent-lilac);
+        }
+
+        .checkbox-label input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--soft-black);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .checkbox-text {
+            color: rgba(244, 243, 247, 0.9);
+            font-size: 0.95rem;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9rem;
+            margin-top: -0.5rem;
+        }
+
+        /* Modal Submit Button */
+        .modal-submit-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--midnight-plum), var(--cosmic-pink));
+            border: none;
+            border-radius: 50px;
+            color: var(--pearl-white);
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(75, 46, 131, 0.3);
+            margin-top: 0.5rem;
+        }
+
+        .modal-submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 60px rgba(242, 142, 185, 0.4);
+        }
+
+        .modal-submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Modal Success Message */
+        .modal-success-message {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .modal-success-message p {
+            font-size: 1.1rem;
+            color: var(--iridescent-lilac);
+            line-height: 1.6;
+        }
+
+        /* Body scroll lock when modal open */
+        body.modal-open {
+            overflow: hidden;
         }
 
         /* Logo Styles */
