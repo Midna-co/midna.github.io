@@ -1732,6 +1732,33 @@
             tl.to(modalContainer, { scale: 0.9, opacity: 0, duration: 0.3, ease: 'power2.in' })
               .to(signupModal, { opacity: 0, duration: 0.2, ease: 'power2.in' }, '-=0.1');
         }
+
+        // Event Listeners
+        // Trigger modal from hero CTA button
+        const heroCTAButton = document.querySelector('.hero-cta-button');
+        if (heroCTAButton) {
+            heroCTAButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        }
+
+        // Close button
+        modalClose.addEventListener('click', closeModal);
+
+        // Close on backdrop click
+        signupModal.addEventListener('click', (e) => {
+            if (e.target === signupModal) {
+                closeModal();
+            }
+        });
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && signupModal.style.display === 'flex') {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
