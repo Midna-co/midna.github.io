@@ -550,63 +550,19 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            /* Enable smooth scrolling on mobile */
-            html, body {
-                -webkit-overflow-scrolling: touch;
+            .main-header h1 {
+                font-size: 2rem;
             }
 
-            .container {
-                padding: 1rem;
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-            }
-
-            .hero {
-                margin-bottom: 3rem;
-            }
-
-            .hero-image-container {
-                height: 60vh;
-                min-height: 400px;
-                max-height: 500px;
-            }
-
-            .about-section {
-                margin: 3rem 1rem;
+            .signup-button {
+                min-width: 280px;
+                font-size: 0.9rem;
+                padding: 0.9rem 2rem;
             }
 
             .hero-content {
-                width: 95%;
-                padding: 1.5rem 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-                line-height: 1.2;
-            }
-
-            .hero h2 {
-                font-size: 1.5rem;
-            }
-
-            .hero p {
-                font-size: 0.95rem;
-                padding: 0;
-            }
-
-            .hero-cta-button {
-                width: 100%;
-                padding: 1rem 2rem;
-                font-size: 1rem;
-                margin-top: 1.5rem;
-            }
-
-            .hero-cta-button:hover {
-                transform: none;
-            }
-
-            .hero-cta-button:active {
-                transform: scale(0.98);
+                gap: 1rem;
+                padding: 1rem;
             }
 
             .features {
@@ -1421,46 +1377,24 @@
             // GSAP Timeline for entrance animations
             const tl = gsap.timeline();
 
-            // Animate hero section with GSAP - only opacity, no transforms that affect layout
-            tl.from('.hero h1', {
-                opacity: 0,
-                duration: 3,
+            // Animate hero content with GSAP
+            // Set initial states
+            gsap.set('.main-header', { opacity: 0, y: -20 });
+            gsap.set('.signup-button', { opacity: 0, y: 30 });
+
+            tl.to('.main-header', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
                 ease: 'power3.out'
             })
-            .from('.hero h2', {
-                opacity: 0,
-                duration: 1.2,
-                ease: 'power3.out'
-            }, '-=0.8')
-            .from('.hero p', {
-                opacity: 0,
-                duration: 1,
-                ease: 'power3.out'
-            }, '-=0.6')
-            .from('.about-section', {
-                opacity: 0,
-                duration: 1,
-                ease: 'power3.out'
-            }, '-=0.4')
-            .to('.feature-card', {
+            .to('.signup-button', {
                 opacity: 1,
-                duration: 1,
+                y: 0,
+                duration: 0.8,
                 stagger: 0.2,
                 ease: 'power3.out'
-            }, '-=0.5')
-            .from('.cta-section', {
-                opacity: 0,
-                duration: 1,
-                ease: 'power3.out'
-            }, '-=0.5');
-
-            // Text morphing effect
-            gsap.to('.hero h1', {
-                backgroundPosition: '200% center',
-                duration: 32,
-                ease: 'none',
-                repeat: -1
-            });
+            }, '-=0.3');
         });
 
         // Spotlight Effect (desktop only)
@@ -1717,11 +1651,21 @@
         }
 
         // Event Listeners
-        // Trigger modal from hero CTA button
-        const heroCTAButton = document.querySelector('.hero-cta-button');
-        if (heroCTAButton) {
-            heroCTAButton.addEventListener('click', (e) => {
+        // Trigger modal from signup buttons
+        const clienteleSignupBtn = document.getElementById('clienteleSignupBtn');
+        const aestheticianSignupBtn = document.getElementById('aestheticianSignupBtn');
+
+        if (clienteleSignupBtn) {
+            clienteleSignupBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                openModal();
+            });
+        }
+
+        if (aestheticianSignupBtn) {
+            aestheticianSignupBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // For now, also open the same modal - can be customized later
                 openModal();
             });
         }
