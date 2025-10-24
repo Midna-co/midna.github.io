@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Midna - Where Beauty Meets Intelligence</title>
-    <meta name="description" content="Something extraordinary is coming to the aesthetics industry">
+    <title>MIDNA - Become Your Best Self With A Little Help | Personalized Beauty & Medspa Treatments</title>
+    <meta name="description" content="Breaking down the journey of beauty. Step-by-step treatment plans, skincare regimens, and exclusive local medspa deals - personalized to your beauty goals. Get free skin analysis and up to 20% off.">
+    <meta name="keywords" content="beauty, medspa, skincare, beauty treatments, personalized skincare, beauty consultations, medspa deals">
+    <meta property="og:title" content="MIDNA - Become Your Best Self With A Little Help">
+    <meta property="og:description" content="Breaking down the journey of beauty with personalized treatment plans and exclusive medspa deals.">
+    <meta property="og:type" content="website">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,20 +39,17 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--soft-black);
             color: var(--pearl-white);
-            overflow: hidden; /* Prevent all scrolling */
+            overflow-x: hidden; /* Prevent horizontal scrolling only */
+            overflow-y: auto; /* Allow vertical scrolling */
             position: relative;
-            height: 100vh;
-            max-height: 100vh;
-            /* Mobile viewport fix */
-            height: 100dvh;
-            max-height: 100dvh;
+            min-height: 100vh;
+            min-height: 100dvh;
         }
 
         html {
-            overflow: hidden; /* Prevent all scrolling */
-            height: 100vh;
-            /* Mobile viewport fix */
-            height: 100dvh;
+            overflow-x: hidden; /* Prevent horizontal scrolling only */
+            overflow-y: auto; /* Allow vertical scrolling */
+            scroll-behavior: smooth;
         }
 
         /* Animated Gradient Background */
@@ -117,23 +118,21 @@
         .container {
             position: relative;
             z-index: 1;
-            height: 100vh;
-            max-height: 100vh;
-            /* Mobile viewport fix */
-            height: 100dvh;
-            max-height: 100dvh;
+            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 2rem;
-            overflow: hidden; /* Prevent content from causing scrolling */
+            padding-top: 4rem;
+            padding-bottom: 4rem;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             opacity: 0;
             animation: fadeIn 1.5s forwards;
         }
@@ -142,7 +141,7 @@
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 300;
             letter-spacing: -0.02em;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             background: linear-gradient(135deg, var(--pearl-white), var(--iridescent-lilac));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -150,13 +149,22 @@
             position: relative;
         }
 
+        .hero h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            color: var(--cosmic-pink);
+        }
+
         .hero p {
             font-size: 1.25rem;
             font-weight: 300;
             color: rgba(244, 243, 247, 0.7);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             letter-spacing: 0.02em;
+            line-height: 1.6;
         }
 
         /* Typewriter Effect */
@@ -178,8 +186,7 @@
             gap: 2rem;
             max-width: 900px;
             margin: 4rem auto;
-            opacity: 0;
-            animation: fadeIn 1.5s 0.5s forwards;
+            width: 100%;
         }
 
         .feature-card {
@@ -194,6 +201,7 @@
             position: relative;
             overflow: hidden;
             will-change: transform;
+            opacity: 0;
         }
 
         .feature-card::before {
@@ -240,12 +248,106 @@
             margin-bottom: 0.5rem;
         }
 
+        .feature-card p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(244, 243, 247, 0.7);
+            line-height: 1.5;
+        }
+
+        /* About Section */
+        .about-section {
+            margin: 3rem auto;
+            max-width: 800px;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(244, 243, 247, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(244, 243, 247, 0.1);
+            border-radius: 20px;
+            opacity: 0;
+            animation: fadeIn 1.5s 0.8s forwards;
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--iridescent-lilac), var(--cosmic-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-section h3 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            color: var(--pearl-white);
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(244, 243, 247, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-item {
+            padding: 1.5rem;
+            background: rgba(216, 180, 226, 0.05);
+            border: 1px solid rgba(216, 180, 226, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .service-item:hover {
+            background: rgba(216, 180, 226, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .service-item h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--cosmic-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-item p {
+            font-size: 0.95rem;
+            color: rgba(244, 243, 247, 0.7);
+        }
+
         /* CTA Section */
         .cta-section {
-            margin-top: 4rem;
+            margin-top: 3rem;
             text-align: center;
             opacity: 0;
             animation: fadeIn 1.5s 1s forwards;
+        }
+
+        .cta-section h3 {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: rgba(244, 243, 247, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .highlight {
+            color: var(--cosmic-pink);
+            font-weight: 500;
         }
 
         .waitlist-form {
@@ -385,27 +487,15 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            /* Enable scrolling on mobile if content overflows */
+            /* Enable smooth scrolling on mobile */
             html, body {
-                overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
-            }
-
-            body {
-                min-height: 100vh;
-                min-height: 100dvh;
-                height: auto;
-                max-height: none;
             }
 
             .container {
                 padding: 1rem;
-                justify-content: flex-start;
                 padding-top: 2rem;
-                height: auto;
-                min-height: 100vh;
-                min-height: 100dvh;
-                max-height: none;
+                padding-bottom: 2rem;
             }
 
             .hero {
@@ -700,6 +790,21 @@
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
         }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(244, 243, 247, 0.1);
+            opacity: 0;
+            animation: fadeIn 1.5s 1.2s forwards;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: rgba(244, 243, 247, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -730,12 +835,23 @@
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <h1>Where Beauty Meets Intelligence</h1>
-            <p class="typewriter">Something extraordinary is coming to the aesthetics industry</p>
+            <h1>MIDNA</h1>
+            <h2>become your best self<br>with a little help</h2>
+            <p>Breaking down the journey of beauty.<br>Step-by-step treatment plans, skincare regimens, and exclusive local medspa deals - personalized to your beauty goals.</p>
         </section>
 
-        <!-- Feature Cards -->
+        <!-- About MIDNA Section -->
+        <section class="about-section">
+            <h2>About MIDNA</h2>
+            <h3>Your Better Beauty Journey</h3>
+            <p>MIDNA is revolutionizing the beauty-as-a-lifestyle industry. Our app helps you become your best self, via personalized skincare consultations, treatment recommendations and explanations, and exclusive access to expert services.</p>
+            <p>Our goal is to empower users to maximize their natural beauty, achieve their skincare goals, and radiate confidence from within.</p>
+        </section>
+
+        <!-- Our Services Section -->
         <section class="features">
+            <h2 style="grid-column: 1/-1; text-align: center; font-size: 2rem; font-weight: 400; margin-bottom: 1rem; background: linear-gradient(135deg, var(--iridescent-lilac), var(--cosmic-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Our Services</h2>
+
             <div class="feature-card">
                 <div class="border-trail"></div>
                 <div class="feature-icon">
@@ -744,7 +860,8 @@
                               stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h3>Intuitive</h3>
+                <h3>Skincare Consultations</h3>
+                <p>Beauty Treatments</p>
             </div>
 
             <div class="feature-card">
@@ -755,7 +872,8 @@
                                  stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h3>Powerful</h3>
+                <h3>Medspa Services</h3>
+                <p>Personalized Care</p>
             </div>
 
             <div class="feature-card">
@@ -767,12 +885,14 @@
                         <path d="M 26 30 L 34 30" stroke-linecap="round"/>
                     </svg>
                 </div>
-                <h3>Connected</h3>
+                <h3>Expert Advice</h3>
+                <p>Enhance Your Beauty</p>
             </div>
         </section>
 
         <!-- CTA Section -->
         <section class="cta-section">
+            <h3>Sign up to receive your free skin analysis, personalized medspa plan, and up to <span class="highlight">20% off</span> your next medspa treatment when we launch.</h3>
             <form class="waitlist-form" id="waitlistForm">
                 <div class="input-group">
                     <input
@@ -781,16 +901,22 @@
                         placeholder="Enter your email"
                         required
                         id="emailInput"
+                        aria-label="Email address"
                     />
                 </div>
                 <button type="submit" class="magnetic-button" id="submitBtn">
-                    Join the Evolution
+                    Join the Waitlist
                 </button>
             </form>
             <div class="success-message" id="successMessage">
-                You're on the list. Prepare for transformation.
+                Welcome to MIDNA! You're on the list for exclusive early access.
             </div>
         </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Midna LLC. All rights reserved.</p>
+        </footer>
     </div>
 
     <script>
@@ -814,13 +940,23 @@
                 duration: 1.5,
                 ease: 'power3.out'
             })
-            .from('.hero p', {
+            .from('.hero h2', {
                 opacity: 0,
                 duration: 1.2,
                 ease: 'power3.out'
             }, '-=0.8')
-            .from('.feature-card', {
+            .from('.hero p', {
                 opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            }, '-=0.6')
+            .from('.about-section', {
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            }, '-=0.4')
+            .to('.feature-card', {
+                opacity: 1,
                 duration: 1,
                 stagger: 0.2,
                 ease: 'power3.out'
