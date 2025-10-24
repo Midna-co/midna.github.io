@@ -124,8 +124,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 2rem;
-            padding-top: 4rem;
+            padding: 0;
             padding-bottom: 4rem;
         }
 
@@ -133,38 +132,117 @@
         .hero {
             text-align: center;
             margin-bottom: 3rem;
+            margin-top: 0;
             opacity: 0;
             animation: fadeIn 1.5s forwards;
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            max-width: none;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            height: 85vh;
+            max-height: 800px;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 50%;
+            opacity: 1;
+            filter: sepia(0.4) brightness(1.2) saturate(0.7);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+            padding: 3rem 2.5rem;
+            background: rgba(75, 75, 85, 0.3);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 20px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
             font-weight: 300;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--pearl-white), var(--iridescent-lilac));
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: var(--pearl-white);
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #E8C4F0, #FF69B4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            position: relative;
         }
 
         .hero h2 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            margin-bottom: 1rem;
-            color: var(--cosmic-pink);
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: var(--pearl-white);
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             font-weight: 300;
-            color: rgba(244, 243, 247, 0.7);
+            color: rgba(244, 243, 247, 0.95);
             max-width: 700px;
-            margin: 0 auto;
+            margin: 0.5rem auto;
+            letter-spacing: 0.01em;
+            line-height: 1.7;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-cta-button {
+            margin-top: 2rem;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--iridescent-lilac), var(--cosmic-pink));
+            border: none;
+            border-radius: 50px;
+            color: var(--soft-black);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(216, 180, 226, 0.4);
+            text-transform: none;
             letter-spacing: 0.02em;
-            line-height: 1.6;
+        }
+
+        .hero-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(216, 180, 226, 0.6);
+        }
+
+        .hero-cta-button:active {
+            transform: translateY(-1px);
         }
 
         /* Typewriter Effect */
@@ -185,8 +263,8 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             max-width: 900px;
-            margin: 4rem auto;
-            width: 100%;
+            margin: 4rem 2rem;
+            width: calc(100% - 4rem);
         }
 
         .feature-card {
@@ -257,7 +335,7 @@
 
         /* About Section */
         .about-section {
-            margin: 3rem auto;
+            margin: 3rem 2rem;
             max-width: 800px;
             text-align: center;
             padding: 2rem;
@@ -329,6 +407,8 @@
         /* CTA Section */
         .cta-section {
             margin-top: 3rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
             text-align: center;
             opacity: 0;
             animation: fadeIn 1.5s 1s forwards;
@@ -502,14 +582,44 @@
                 margin-bottom: 2rem;
             }
 
+            .hero-image-container {
+                height: 60vh;
+                min-height: 400px;
+                max-height: 500px;
+            }
+
+            .hero-content {
+                width: 95%;
+                padding: 1.5rem 1rem;
+            }
+
             .hero h1 {
                 font-size: 2rem;
                 line-height: 1.2;
             }
 
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
             .hero p {
                 font-size: 0.95rem;
-                padding: 0 1rem;
+                padding: 0;
+            }
+
+            .hero-cta-button {
+                width: 100%;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                margin-top: 1.5rem;
+            }
+
+            .hero-cta-button:hover {
+                transform: none;
+            }
+
+            .hero-cta-button:active {
+                transform: scale(0.98);
             }
 
             .features {
@@ -835,9 +945,15 @@
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <h1>MIDNA</h1>
-            <h2>become your best self<br>with a little help</h2>
-            <p>Breaking down the journey of beauty.<br>Step-by-step treatment plans, skincare regimens, and exclusive local medspa deals - personalized to your beauty goals.</p>
+            <div class="hero-image-container">
+                <img src="images/hero-image.jpg" alt="Beauty transformation journey" class="hero-image" />
+                <div class="hero-content">
+                    <h1>become your <span class="gradient-text">best self</span></h1>
+                    <h2>with a little help</h2>
+                    <p>Breaking down the journey of beauty.</p>
+                    <p>Step-by-step treatment plans, skincare regimens, and exclusive local medspa deals - personalized to your beauty goals.</p>
+                </div>
+            </div>
         </section>
 
         <!-- About MIDNA Section -->
@@ -970,7 +1086,7 @@
             // Text morphing effect
             gsap.to('.hero h1', {
                 backgroundPosition: '200% center',
-                duration: 8,
+                duration: 32,
                 ease: 'none',
                 repeat: -1
             });
