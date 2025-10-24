@@ -1115,6 +1115,28 @@
             transform: none;
         }
 
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--pearl-white);
+            animation: spin 0.8s linear infinite;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .modal-submit-button.submitting {
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
         /* Modal Success Message */
         .modal-success-message {
             text-align: center;
@@ -1325,7 +1347,7 @@
             <form id="modalForm" class="modal-form">
                 <input type="text" name="firstName" class="modal-input" placeholder="First Name" required aria-label="First Name" />
                 <input type="email" name="email" class="modal-input" placeholder="Email" required aria-label="Email" />
-                <input type="text" name="zipCode" class="modal-input" placeholder="Zip Code" required aria-label="Zip Code" />
+                <input type="text" name="zipCode" class="modal-input" placeholder="Zip Code" required aria-label="Zip Code" pattern="[0-9]*" inputmode="numeric" maxlength="5" />
                 <input type="number" name="age" class="modal-input" placeholder="Age" required aria-label="Age" min="1" max="120" />
 
                 <div class="interests-section">
@@ -1383,7 +1405,7 @@
                 <input type="text" name="name" class="modal-input" placeholder="Name" required aria-label="Name" />
                 <input type="email" name="email" class="modal-input" placeholder="Email" required aria-label="Email" />
                 <input type="tel" name="phoneNumber" class="modal-input" placeholder="Phone Number" required aria-label="Phone Number" />
-                <input type="text" name="zipCode" class="modal-input" placeholder="Zip Code" required aria-label="Zip Code" />
+                <input type="text" name="zipCode" class="modal-input" placeholder="Zip Code" required aria-label="Zip Code" pattern="[0-9]*" inputmode="numeric" maxlength="5" />
 
                 <div class="interests-section">
                     <label class="interests-label">Offerings <span class="required-note">(Select at least one)</span></label>
@@ -1730,6 +1752,9 @@
                     modalForm.style.display = 'flex';
                     modalSuccessMessage.style.display = 'none';
                     interestsError.style.display = 'none';
+                    // Restore title and subtitle
+                    signupModal.querySelector('.modal-title').style.display = '';
+                    signupModal.querySelector('.modal-subtitle').style.display = '';
                 }
             });
 
@@ -1813,11 +1838,12 @@
                 return;
             }
 
-            // Disable submit button
+            // Disable submit button and show loading state
             const submitButton = modalForm.querySelector('.modal-submit-button');
             const originalButtonText = submitButton.textContent;
             submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
+            submitButton.classList.add('submitting');
+            submitButton.innerHTML = 'Submitting<span class="loading-spinner"></span>';
 
             try {
                 // Collect form data
@@ -1841,9 +1867,11 @@
                     body: JSON.stringify(formData)
                 });
 
-                // Show success message
+                // Show success message and hide title/subtitle
                 modalForm.style.display = 'none';
                 modalSuccessMessage.style.display = 'block';
+                signupModal.querySelector('.modal-title').style.display = 'none';
+                signupModal.querySelector('.modal-subtitle').style.display = 'none';
 
                 // Hide current CTA section
                 const ctaSection = document.querySelector('.cta-section');
@@ -1856,14 +1884,17 @@
                 // Still show success in no-cors mode
                 modalForm.style.display = 'none';
                 modalSuccessMessage.style.display = 'block';
+                signupModal.querySelector('.modal-title').style.display = 'none';
+                signupModal.querySelector('.modal-subtitle').style.display = 'none';
 
                 const ctaSection = document.querySelector('.cta-section');
                 if (ctaSection) {
                     ctaSection.classList.add('hidden');
                 }
             } finally {
-                // Reset button
+                // Reset button state
                 submitButton.disabled = false;
+                submitButton.classList.remove('submitting');
                 submitButton.textContent = originalButtonText;
             }
         });
@@ -1904,6 +1935,9 @@
                     aestheticianModalForm.style.display = 'flex';
                     aestheticianModalSuccessMessage.style.display = 'none';
                     offeringsError.style.display = 'none';
+                    // Restore title and subtitle
+                    aestheticianModal.querySelector('.modal-title').style.display = '';
+                    aestheticianModal.querySelector('.modal-subtitle').style.display = '';
                 }
             });
 
@@ -1968,11 +2002,12 @@
                 return;
             }
 
-            // Disable submit button
+            // Disable submit button and show loading state
             const submitButton = aestheticianModalForm.querySelector('.modal-submit-button');
             const originalButtonText = submitButton.textContent;
             submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
+            submitButton.classList.add('submitting');
+            submitButton.innerHTML = 'Submitting<span class="loading-spinner"></span>';
 
             try {
                 // Collect form data
@@ -1996,18 +2031,23 @@
                     body: JSON.stringify(formData)
                 });
 
-                // Show success message
+                // Show success message and hide title/subtitle
                 aestheticianModalForm.style.display = 'none';
                 aestheticianModalSuccessMessage.style.display = 'block';
+                aestheticianModal.querySelector('.modal-title').style.display = 'none';
+                aestheticianModal.querySelector('.modal-subtitle').style.display = 'none';
 
             } catch (error) {
                 console.error('Submission error:', error);
                 // Still show success in no-cors mode
                 aestheticianModalForm.style.display = 'none';
                 aestheticianModalSuccessMessage.style.display = 'block';
+                aestheticianModal.querySelector('.modal-title').style.display = 'none';
+                aestheticianModal.querySelector('.modal-subtitle').style.display = 'none';
             } finally {
-                // Reset button
+                // Reset button state
                 submitButton.disabled = false;
+                submitButton.classList.remove('submitting');
                 submitButton.textContent = originalButtonText;
             }
         });
