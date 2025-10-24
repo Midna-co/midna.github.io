@@ -39,11 +39,16 @@
             position: relative;
             height: 100vh;
             max-height: 100vh;
+            /* Mobile viewport fix */
+            height: 100dvh;
+            max-height: 100dvh;
         }
 
         html {
             overflow: hidden; /* Prevent all scrolling */
             height: 100vh;
+            /* Mobile viewport fix */
+            height: 100dvh;
         }
 
         /* Animated Gradient Background */
@@ -114,6 +119,9 @@
             z-index: 1;
             height: 100vh;
             max-height: 100vh;
+            /* Mobile viewport fix */
+            height: 100dvh;
+            max-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -377,17 +385,194 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .features {
-                grid-template-columns: 1fr;
-                max-width: 350px;
+            /* Enable scrolling on mobile if content overflows */
+            html, body {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            body {
+                min-height: 100vh;
+                min-height: 100dvh;
+                height: auto;
+                max-height: none;
+            }
+
+            .container {
+                padding: 1rem;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                height: auto;
+                min-height: 100vh;
+                min-height: 100dvh;
+                max-height: none;
+            }
+
+            .hero {
+                margin-bottom: 2rem;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                line-height: 1.2;
             }
 
             .hero p {
+                font-size: 0.95rem;
+                padding: 0 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+                gap: 1rem;
+                margin: 2rem auto;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 1rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .cta-section {
+                margin-top: 2rem;
+            }
+
+            .waitlist-form {
+                max-width: 100%;
+                gap: 1rem;
+            }
+
+            .email-input {
+                padding: 0.875rem 1.25rem;
+                font-size: 0.95rem;
+            }
+
+            .magnetic-button {
+                padding: 0.875rem 2rem;
                 font-size: 1rem;
+                width: 100%;
+                /* Ensure minimum tap target size (44x44px recommended) */
+                min-height: 44px;
+                touch-action: manipulation; /* Prevent double-tap zoom */
+            }
+
+            /* Prevent text selection on mobile */
+            .feature-card,
+            .magnetic-button {
+                -webkit-user-select: none;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .email-input {
+                -webkit-user-select: text;
+                user-select: text;
+            }
+
+            /* Hide desktop-only effects on mobile */
+            .cursor-glow,
+            .spotlight,
+            .beam {
+                display: none;
+            }
+
+            /* Reduce animation complexity on mobile */
+            .gradient-orb {
+                filter: blur(60px);
+            }
+
+            .morphing-shape {
+                display: none;
+            }
+
+            /* Disable hover effects on touch devices */
+            .feature-card:hover {
+                transform: none;
+            }
+
+            .magnetic-button:hover {
+                transform: none;
+            }
+
+            /* Add touch-friendly active states */
+            .magnetic-button:active {
+                transform: scale(0.98);
+                opacity: 0.9;
+            }
+
+            .feature-card:active {
+                transform: scale(0.98);
+                opacity: 0.95;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero p {
+                font-size: 0.875rem;
+            }
+
+            .feature-card {
+                padding: 1.25rem;
+            }
+
+            .orb-1, .orb-2 {
+                width: 400px;
+                height: 400px;
+            }
+
+            .orb-3 {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .container {
+                padding-top: 1rem;
+            }
+
+            .hero {
+                margin-bottom: 1.5rem;
+            }
+
+            .features {
+                margin: 1.5rem auto;
+            }
+
+            .cta-section {
+                margin-top: 1.5rem;
+            }
+        }
+
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .gradient-orb,
+            .morphing-shape,
+            .beam {
+                animation: none !important;
             }
         }
 
@@ -609,6 +794,15 @@
     </div>
 
     <script>
+        // Detect if device is mobile/touch
+        const isTouchDevice = () => {
+            return (('ontouchstart' in window) ||
+                   (navigator.maxTouchPoints > 0) ||
+                   (navigator.msMaxTouchPoints > 0));
+        };
+
+        const isMobile = isTouchDevice();
+
         // Wait for GSAP to load
         window.addEventListener('load', () => {
             // GSAP Timeline for entrance animations
@@ -646,38 +840,40 @@
             });
         });
 
-        // Spotlight Effect
-        const spotlight = document.getElementById('spotlight');
+        // Spotlight Effect (desktop only)
+        if (!isMobile) {
+            const spotlight = document.getElementById('spotlight');
 
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) * 100;
-            const y = (e.clientY / window.innerHeight) * 100;
-            spotlight.style.setProperty('--mouse-x', `${x}%`);
-            spotlight.style.setProperty('--mouse-y', `${y}%`);
-        });
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) * 100;
+                const y = (e.clientY / window.innerHeight) * 100;
+                spotlight.style.setProperty('--mouse-x', `${x}%`);
+                spotlight.style.setProperty('--mouse-y', `${y}%`);
+            });
 
-        // Cursor Glow Effect
-        const cursorGlow = document.getElementById('cursorGlow');
-        let mouseX = 0;
-        let mouseY = 0;
-        let glowX = 0;
-        let glowY = 0;
+            // Cursor Glow Effect
+            const cursorGlow = document.getElementById('cursorGlow');
+            let mouseX = 0;
+            let mouseY = 0;
+            let glowX = 0;
+            let glowY = 0;
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
 
-        function animateCursor() {
-            glowX += (mouseX - glowX) * 0.1;
-            glowY += (mouseY - glowY) * 0.1;
+            function animateCursor() {
+                glowX += (mouseX - glowX) * 0.1;
+                glowY += (mouseY - glowY) * 0.1;
 
-            cursorGlow.style.left = glowX + 'px';
-            cursorGlow.style.top = glowY + 'px';
+                cursorGlow.style.left = glowX + 'px';
+                cursorGlow.style.top = glowY + 'px';
 
-            requestAnimationFrame(animateCursor);
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
         }
-        animateCursor();
 
         // Magnetic button effect removed - now handled by advanced magnetic effect below to avoid transform conflicts
         const magneticButton = document.querySelector('.magnetic-button');
@@ -735,37 +931,40 @@
 
         // Add subtle animation to feature cards on hover with GSAP
         document.querySelectorAll('.feature-card').forEach((card, index) => {
-            // Progressive blur on hover
-            card.addEventListener('mouseenter', () => {
-                gsap.to(card, {
-                    scale: 1.05,
-                    duration: 0.3,
-                    ease: 'power2.out'
+            // Only add hover effects on desktop
+            if (!isMobile) {
+                // Progressive blur on hover
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, {
+                        scale: 1.05,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+
+                    // Activate progressive blur
+                    document.getElementById('progressiveBlur').classList.add('active');
                 });
 
-                // Activate progressive blur
-                document.getElementById('progressiveBlur').classList.add('active');
-            });
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        scale: 1,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
 
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: 'power2.out'
+                    // Deactivate progressive blur
+                    document.getElementById('progressiveBlur').classList.remove('active');
                 });
 
-                // Deactivate progressive blur
-                document.getElementById('progressiveBlur').classList.remove('active');
-            });
-
-            // Subtle floating animation using GSAP's y property to avoid transform conflicts
-            gsap.to(card, {
-                y: 5,
-                duration: 2 + index * 0.5,
-                repeat: -1,
-                yoyo: true,
-                ease: 'power1.inOut'
-            });
+                // Subtle floating animation using GSAP's y property to avoid transform conflicts
+                gsap.to(card, {
+                    y: 5,
+                    duration: 2 + index * 0.5,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'power1.inOut'
+                });
+            }
         });
 
         // Morphing text effect on hero
@@ -774,35 +973,37 @@
             heroText.classList.add('shimmer-text');
         }
 
-        // Advanced magnetic effect with boundary detection
-        const magneticElements = document.querySelectorAll('.magnetic-button, .feature-card');
-        magneticElements.forEach(el => {
-            el.addEventListener('mousemove', (e) => {
-                const rect = el.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
+        // Advanced magnetic effect with boundary detection (desktop only)
+        if (!isMobile) {
+            const magneticElements = document.querySelectorAll('.magnetic-button, .feature-card');
+            magneticElements.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
 
-                const distance = Math.sqrt(x * x + y * y);
-                const maxDistance = Math.max(rect.width, rect.height) / 2;
-                const strength = Math.max(0, 1 - distance / maxDistance) * 0.3;
+                    const distance = Math.sqrt(x * x + y * y);
+                    const maxDistance = Math.max(rect.width, rect.height) / 2;
+                    const strength = Math.max(0, 1 - distance / maxDistance) * 0.3;
 
-                gsap.to(el, {
-                    x: x * strength,
-                    y: y * strength,
-                    duration: 0.3,
-                    ease: 'power2.out'
+                    gsap.to(el, {
+                        x: x * strength,
+                        y: y * strength,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    gsap.to(el, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.5,
+                        ease: 'elastic.out(1, 0.3)'
+                    });
                 });
             });
-
-            el.addEventListener('mouseleave', () => {
-                gsap.to(el, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.5,
-                    ease: 'elastic.out(1, 0.3)'
-                });
-            });
-        });
+        }
 
         // Animate gradient orbs with GSAP
         gsap.utils.toArray('.gradient-orb').forEach((orb, index) => {
