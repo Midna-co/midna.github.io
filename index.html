@@ -1759,6 +1759,37 @@
                 closeModal();
             }
         });
+
+        // Validate Form
+        function validateModalForm() {
+            let isValid = true;
+
+            // Clear previous errors
+            interestsError.style.display = 'none';
+            document.querySelectorAll('.modal-input.error').forEach(input => {
+                input.classList.remove('error');
+            });
+
+            // Validate required text inputs
+            const requiredInputs = modalForm.querySelectorAll('.modal-input[required]');
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    isValid = false;
+                }
+            });
+
+            // Validate at least one interest checkbox
+            const checkboxes = modalForm.querySelectorAll('input[name="interests"]');
+            const atLeastOneChecked = Array.from(checkboxes).some(cb => cb.checked);
+
+            if (!atLeastOneChecked) {
+                interestsError.style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
+        }
     </script>
 </body>
 </html>
