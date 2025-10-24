@@ -1822,6 +1822,7 @@
             try {
                 // Collect form data
                 const formData = {
+                    formType: 'client',  // Hidden field to identify form source
                     firstName: modalForm.firstName.value.trim(),
                     email: modalForm.email.value.trim(),
                     zipCode: modalForm.zipCode.value.trim(),
@@ -1985,6 +1986,7 @@
             try {
                 // Collect form data
                 const formData = {
+                    formType: 'aesthetician',  // Hidden field to identify form source
                     name: aestheticianModalForm.name.value.trim(),
                     email: aestheticianModalForm.email.value.trim(),
                     phoneNumber: aestheticianModalForm.phoneNumber.value.trim(),
