@@ -45,17 +45,17 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--soft-black);
             color: var(--pearl-white);
-            overflow-x: hidden; /* Prevent horizontal scrolling only */
-            overflow-y: auto; /* Allow vertical scrolling */
+            overflow: hidden; /* Prevent all scrolling */
             position: relative;
-            min-height: 100vh;
-            min-height: 100dvh;
+            height: 100vh;
+            height: 100dvh;
+            margin: 0;
+            padding: 0;
         }
 
         html {
-            overflow-x: hidden; /* Prevent horizontal scrolling only */
-            overflow-y: auto; /* Allow vertical scrolling */
-            scroll-behavior: smooth;
+            overflow: hidden; /* Prevent all scrolling */
+            height: 100%;
         }
 
         /* Animated Gradient Background */
@@ -124,41 +124,54 @@
         .container {
             position: relative;
             z-index: 1;
-            min-height: 100vh;
-            min-height: 100dvh;
+            height: 100vh;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
             padding: 0;
-            padding-bottom: 4rem;
+            overflow: hidden;
+        }
+
+        /* Header/Nav */
+        .main-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            text-align: center;
+            z-index: 100;
+            flex-shrink: 0;
+        }
+
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin: 0;
+            color: var(--soft-black);
         }
 
         /* Hero Section */
         .hero {
-            text-align: center;
-            margin-bottom: 6rem;
-            margin-top: 0;
-            opacity: 0;
-            animation: fadeIn 1.5s forwards;
+            flex: 1;
             position: relative;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            max-width: none;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero-image-container {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 85vh;
-            max-height: 800px;
-            min-height: 600px;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-bottom: 0;
-            border-radius: 0;
         }
 
         .hero-image {
@@ -173,81 +186,41 @@
         }
 
         .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
             z-index: 2;
             text-align: center;
-            width: 90%;
-            max-width: 900px;
-            padding: 3rem 2.5rem;
-            background: rgba(75, 75, 85, 0.3);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 2rem;
         }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            font-weight: 300;
-            letter-spacing: -0.03em;
-            margin-bottom: 1rem;
-            color: var(--pearl-white);
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero h1 .gradient-text {
-            background: linear-gradient(135deg, #E8C4F0, #FF69B4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero h2 {
-            font-size: clamp(1.8rem, 5vw, 3.5rem);
-            font-weight: 300;
-            font-style: italic;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            color: var(--pearl-white);
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            font-weight: 300;
-            color: rgba(244, 243, 247, 0.95);
-            max-width: 700px;
-            margin: 0.5rem auto;
-            letter-spacing: 0.01em;
-            line-height: 1.7;
-            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero-cta-button {
-            margin-top: 2rem;
-            padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, var(--iridescent-lilac), var(--cosmic-pink));
+        .signup-button {
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.95);
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
             color: var(--soft-black);
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 500;
+            font-style: italic;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(216, 180, 226, 0.4);
-            text-transform: none;
-            letter-spacing: 0.02em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            min-width: 320px;
         }
 
-        .hero-cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(216, 180, 226, 0.6);
+        .signup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 1);
         }
 
-        .hero-cta-button:active {
-            transform: translateY(-1px);
+        .signup-button:active {
+            transform: translateY(0);
         }
 
         /* Typewriter Effect */
@@ -1261,20 +1234,25 @@
 
     <!-- Main Container -->
     <div class="container">
+        <!-- Header/Nav -->
+        <header class="main-header">
+            <h1>MIDNA</h1>
+        </header>
+
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-image-container">
                 <img src="images/spa-beauty-woman.jpg" alt="Beauty transformation journey" class="hero-image" />
                 <div class="hero-content">
-                    <h1>become your <span class="gradient-text">best self</span></h1>
-                    <h2>with a little help</h2>
-                    <p>Breaking down the journey of beauty.</p>
-                    <p>Step-by-step treatment plans, skincare regimens, and exclusive local medspa deals - personalized to your beauty goals.</p>
-                    <button class="hero-cta-button">Clientele Sign Up</button>
+                    <button class="signup-button" id="aestheticianSignupBtn">Aesthetician Signup</button>
+                    <button class="signup-button" id="clienteleSignupBtn">Clientele Sign Up</button>
                 </div>
             </div>
         </section>
+    </div>
 
+    <!-- Hidden sections for reference, remove if not needed -->
+    <div style="display: none;">
         <!-- About MIDNA Section -->
         <section class="about-section">
             <h2>
@@ -1708,12 +1686,16 @@
             signupModal.style.display = 'flex';
             document.body.classList.add('modal-open');
 
-            const formFields = signupModal.querySelectorAll('.modal-input, .checkbox-label, .modal-submit-button');
+            const formFields = signupModal.querySelectorAll('.modal-input, .checkbox-label, .modal-submit-button, .modal-title, .modal-subtitle, .interests-label');
+
+            // Set initial states
+            gsap.set(modalContainer, { scale: 0.8, opacity: 0 });
+            gsap.set(formFields, { y: 20, opacity: 0 });
 
             const tl = gsap.timeline();
             tl.to(signupModal, { opacity: 1, duration: 0.3, ease: 'power2.out' })
-              .from(modalContainer, { scale: 0.8, opacity: 0, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.2')
-              .from(formFields, { y: 20, opacity: 0, duration: 0.2, stagger: 0.08, ease: 'power2.out' }, '-=0.3');
+              .to(modalContainer, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.2')
+              .to(formFields, { y: 0, opacity: 1, duration: 0.2, stagger: 0.08, ease: 'power2.out' }, '-=0.3');
         }
 
         // Close Modal with GSAP Animation
