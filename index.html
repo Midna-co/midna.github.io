@@ -1714,6 +1714,24 @@
               .from(modalContainer, { scale: 0.8, opacity: 0, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.2')
               .from(formFields, { y: 20, opacity: 0, duration: 0.2, stagger: 0.08, ease: 'power2.out' }, '-=0.3');
         }
+
+        // Close Modal with GSAP Animation
+        function closeModal() {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    signupModal.style.display = 'none';
+                    document.body.classList.remove('modal-open');
+                    // Reset form
+                    modalForm.reset();
+                    modalForm.style.display = 'flex';
+                    modalSuccessMessage.style.display = 'none';
+                    interestsError.style.display = 'none';
+                }
+            });
+
+            tl.to(modalContainer, { scale: 0.9, opacity: 0, duration: 0.3, ease: 'power2.in' })
+              .to(signupModal, { opacity: 0, duration: 0.2, ease: 'power2.in' }, '-=0.1');
+        }
     </script>
 </body>
 </html>
