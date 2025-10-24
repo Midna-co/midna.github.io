@@ -170,7 +170,6 @@
             object-fit: cover;
             object-position: 50% 50%;
             opacity: 1;
-            filter: sepia(0.4) brightness(1.2) saturate(0.7);
         }
 
         .hero-content {
@@ -1265,7 +1264,7 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-image-container">
-                <img src="images/hero-image.jpg" alt="Beauty transformation journey" class="hero-image" />
+                <img src="images/spa-beauty-woman.jpg" alt="Beauty transformation journey" class="hero-image" />
                 <div class="hero-content">
                     <h1>become your <span class="gradient-text">best self</span></h1>
                     <h2>with a little help</h2>
@@ -1694,6 +1693,27 @@
                 scrambleText(el);
             });
         }, 1500);
+
+        // Modal Management
+        const signupModal = document.getElementById('signupModal');
+        const modalContainer = signupModal.querySelector('.modal-container');
+        const modalClose = signupModal.querySelector('.modal-close');
+        const modalForm = document.getElementById('modalForm');
+        const modalSuccessMessage = document.getElementById('modalSuccessMessage');
+        const interestsError = document.getElementById('interestsError');
+
+        // Open Modal with GSAP Animation
+        function openModal() {
+            signupModal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+
+            const formFields = signupModal.querySelectorAll('.modal-input, .checkbox-label, .modal-submit-button');
+
+            const tl = gsap.timeline();
+            tl.to(signupModal, { opacity: 1, duration: 0.3, ease: 'power2.out' })
+              .from(modalContainer, { scale: 0.8, opacity: 0, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.2')
+              .from(formFields, { y: 20, opacity: 0, duration: 0.2, stagger: 0.08, ease: 'power2.out' }, '-=0.3');
+        }
     </script>
 </body>
 </html>
