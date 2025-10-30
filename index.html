@@ -1773,21 +1773,21 @@
         }
 
         // Event Listeners
-        // Trigger modal from signup buttons
+        // Navigate to respective pages from signup buttons
         const clienteleSignupBtn = document.getElementById('clienteleSignupBtn');
         const aestheticianSignupBtn = document.getElementById('aestheticianSignupBtn');
 
         if (clienteleSignupBtn) {
             clienteleSignupBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                openModal();
+                window.location.href = 'client.html';
             });
         }
 
         if (aestheticianSignupBtn) {
             aestheticianSignupBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                openAestheticianModal();
+                window.location.href = 'aesthetician.html';
             });
         }
 
