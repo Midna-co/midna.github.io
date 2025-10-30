@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CECPZHYXQS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CECPZHYXQS');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDNA - Aesthetician Platform | Join the Modern Medical Spa Network</title>
+    <meta name="description" content="Join MIDNA's AI-powered medical spa platform designed for modern aestheticians. Dynamic pricing, automated protocols, and tools to scale your business.">
+    <meta name="keywords" content="aesthetician platform, medical spa, medspa platform, aesthetician business, beauty professionals">
+    <meta property="og:title" content="MIDNA - Aesthetician Platform">
+    <meta property="og:description" content="The all-in-one AI-powered medical spa platform designed for the modern aesthetician.">
+    <meta property="og:type" content="website">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Forum&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --beige-bg: #C4B5A0;
+            --soft-black: #1F1F24;
+            --white: #FFFFFF;
+            --beige-button: #DECCB2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', 'Forum', serif;
+            background-color: var(--beige-bg);
+            color: var(--soft-black);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Wrapper */
+        .wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 4rem;
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(196, 181, 160, 0.95);
+            padding: 2rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        /* Logo */
+        .logo {
+            font-family: 'Forum', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            color: var(--soft-black);
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        /* Header Subtitle */
+        .header-subtitle {
+            font-family: 'Forum', serif;
+            font-size: 28px;
+            line-height: 1.5;
+            color: white;
+            font-weight: 400;
+            text-align: left;
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
+
+        /* Background Image */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .background-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Content Wrapper */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            width: 100%;
+            padding: 3rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Description */
+        .description {
+            font-size: 22px;
+            line-height: 1.8;
+            color: white;
+            font-weight: 400;
+        }
+
+        .description p {
+            margin-bottom: 1.2rem;
+        }
+
+        .description .platform-name {
+            font-weight: 700;
+        }
+
+        /* Italic text */
+        .italic-note {
+            font-style: italic;
+            font-size: 22px;
+            line-height: 1.7;
+            margin-top: 0.5rem;
+        }
+
+        /* Buttons Container */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            align-items: flex-start;
+        }
+
+        /* Button Styles */
+        .signup-button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            font-style: italic;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        }
+
+        .signup-button.white {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--soft-black);
+            min-width: 400px;
+        }
+
+        .signup-button.beige {
+            background: rgba(222, 204, 178, 0.95);
+            color: var(--soft-black);
+            min-width: 350px;
+        }
+
+        .signup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .signup-button:active {
+            transform: translateY(0);
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(31, 31, 36, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            position: relative;
+            background: rgba(244, 243, 247, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 243, 247, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Modal Close Button */
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: rgba(244, 243, 247, 0.7);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: #F28EB9;
+            transform: rotate(90deg);
+        }
+
+        /* Modal Title */
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #D8B4E2, #F28EB9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            font-size: 1rem;
+            color: rgba(244, 243, 247, 0.7);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Modal Form */
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(244, 243, 247, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(244, 243, 247, 0.3);
+            border-radius: 50px;
+            color: #F4F3F7;
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+            font-family: 'Forum', serif;
+        }
+
+        .modal-input::placeholder {
+            color: rgba(244, 243, 247, 0.7);
+        }
+
+        .modal-input:focus {
+            border-color: #D8B4E2;
+            background: rgba(244, 243, 247, 0.08);
+        }
+
+        .modal-input.error {
+            border-color: #ff4444;
+            animation: shake 0.3s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Interests Section */
+        .interests-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .interests-label {
+            font-size: 1rem;
+            color: #F4F3F7;
+            font-weight: 400;
+        }
+
+        .required-note {
+            font-size: 0.85rem;
+            color: rgba(244, 243, 247, 0.6);
+            font-weight: 300;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(244, 243, 247, 0.08);
+            border: 1px solid rgba(244, 243, 247, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-label:hover {
+            background: rgba(244, 243, 247, 0.12);
+            border-color: rgba(216, 180, 226, 0.4);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(244, 243, 247, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .checkbox-label input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, #D8B4E2, #F28EB9);
+            border-color: #D8B4E2;
+        }
+
+        .checkbox-label input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--soft-black);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .checkbox-text {
+            color: rgba(244, 243, 247, 0.9);
+            font-size: 0.95rem;
+        }
+
+        .error-message {
+            font-family: 'Inter', sans-serif;
+            color: #ff4444;
+            font-size: 0.9rem;
+            margin-top: -0.5rem;
+        }
+
+        /* Modal Submit Button */
+        .modal-submit-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4B2E83, #F28EB9);
+            border: none;
+            border-radius: 50px;
+            color: #F4F3F7;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(75, 46, 131, 0.3);
+            margin-top: 0.5rem;
+        }
+
+        .modal-submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 60px rgba(242, 142, 185, 0.4);
+        }
+
+        .modal-submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #F4F3F7;
+            animation: spin 0.8s linear infinite;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .modal-submit-button.submitting {
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        /* Modal Success Message */
+        .modal-success-message {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .modal-success-message p {
+            font-size: 1.1rem;
+            color: #D8B4E2;
+            line-height: 1.6;
+        }
+
+        /* Body scroll lock when modal open */
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .wrapper {
+                padding: 0 2rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-subtitle {
+                font-size: 1.2rem;
+                text-align: left;
+            }
+
+            .signup-button.white {
+                min-width: 300px;
+            }
+
+            .signup-button.beige {
+                min-width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .wrapper {
+                padding: 0 1.5rem;
+            }
+
+            .header {
+                padding: 1.5rem 0;
+            }
+
+            .logo {
+                font-size: 3rem;
+                letter-spacing: 0.1em;
+            }
+
+            .header-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .description {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .signup-button {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.8rem;
+                min-width: unset;
+                width: 100%;
+            }
+
+            .signup-button.white,
+            .signup-button.beige {
+                min-width: unset;
+            }
+
+            .modal-container {
+                padding: 2rem 1.5rem;
+                width: 95%;
+                max-height: 85vh;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .modal-input {
+                padding: 0.875rem 1.25rem;
+                font-size: 0.95rem;
+            }
+
+            .modal-submit-button {
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Image -->
+    <div class="background-image">
+        <img src="images/spa-beauty-woman.jpg" alt="Medical spa professional" />
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="wrapper">
+            <div class="header-content">
+                <h1 class="logo">MIDNA</h1>
+                <p class="header-subtitle">The modern woman's AI-powered, personalized beauty expert & executive assistant</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="wrapper">
+            <div class="content-wrapper">
+            <div class="description">
+                <p>Midna is the modern woman's 24/7 executive assistant & agent for all things beauty, designed to simplify the ever-expanding world of skincare, services, and surgeries down to the exact beauty plan & procedures you need for your specific goals & timeline.</p>
+
+                <p>With a proprietary algorithm that understands your face as deeply as your dermatologist, and a personalized (and private) AI agent that researches, curates, and sequences treatments and products for your designated areas of improvement, <span class="platform-name">Midna</span> ensures your beauty stays top priority no matter how busy your schedule.</p>
+
+                <p class="italic-note">Midna is currently invite-only; please sign up on our beauty clientele waitlist below for product updates, early access, and early user-only benefits.</p>
+
+                <p class="italic-note">For interested content creators: we offer a private pilot partnership opportunity with insider access to platform-only beauty insights & <span class="platform-name">beauty</span> tech tools, creator-specific AI agent customization, lifetime access, and other perks. <em>If interested, please sign up below.</em></p>
+            </div>
+
+            <div class="buttons-container">
+                <button class="signup-button white" id="clienteleSignupBtn">Beauty clients: Sign up for early access</button>
+                <a href="https://cal.com/joceshieh" target="_blank" rel="noopener noreferrer" class="signup-button beige" style="text-decoration: none; display: inline-block;">Creators: Inquire for pilot partnership</a>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Signup Modal -->
+    <div id="signupModal" class="modal-overlay" style="display: none;">
+        <div class="modal-container">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h2 class="modal-title">Clientele Sign Up</h2>
+            <p class="modal-subtitle">Get your free skin analysis and up to 20% off</p>
+
+            <form id="modalForm" class="modal-form">
+                <input type="text" name="firstName" class="modal-input" placeholder="First Name" required aria-label="First Name" />
+                <input type="email" name="email" class="modal-input" placeholder="Email" required aria-label="Email" />
+                <input type="text" name="zipCode" class="modal-input" placeholder="Zip Code" required aria-label="Zip Code" pattern="[0-9]*" inputmode="numeric" maxlength="5" />
+                <input type="number" name="age" class="modal-input" placeholder="Age" required aria-label="Age" min="1" max="120" />
+
+                <div class="interests-section">
+                    <label class="interests-label">What concerns do you have? <span class="required-note">(Select at least one)</span></label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="undereye bags" />
+                            <span class="checkbox-text">Undereye Bags</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="marionette lines" />
+                            <span class="checkbox-text">Marionette Lines</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="nasolabial folds" />
+                            <span class="checkbox-text">Nasolabial Folds (Smile Lines)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="jawline recession" />
+                            <span class="checkbox-text">Jawline Recession</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="weak chin" />
+                            <span class="checkbox-text">Weak Chin</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="horizontal neck lines" />
+                            <span class="checkbox-text">Horizontal Neck "Tech-Neck" Lines</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="perioral lines" />
+                            <span class="checkbox-text">Perioral "Smokers" Barcode Lines</span>
+                        </label>
+                    </div>
+                    <span class="error-message" id="interestsError" style="display: none;">Please select at least one concern</span>
+                </div>
+
+                <button type="submit" class="modal-submit-button">Clientele Sign Up</button>
+            </form>
+
+            <div class="modal-success-message" id="modalSuccessMessage" style="display: none;">
+                <p>Welcome to MIDNA! You're on the list for exclusive early access.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== CLIENT MODAL MANAGEMENT ==========
+        const signupModal = document.getElementById('signupModal');
+        const modalContainer = signupModal.querySelector('.modal-container');
+        const modalClose = signupModal.querySelector('.modal-close');
+        const modalForm = document.getElementById('modalForm');
+        const modalSuccessMessage = document.getElementById('modalSuccessMessage');
+        const interestsError = document.getElementById('interestsError');
+
+        // Open Client Modal with GSAP Animation
+        function openModal() {
+            signupModal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+
+            const formFields = signupModal.querySelectorAll('.modal-input, .checkbox-label, .modal-submit-button, .modal-title, .modal-subtitle, .interests-label');
+
+            // Set initial states
+            gsap.set(modalContainer, { scale: 0.8, opacity: 0 });
+            gsap.set(formFields, { y: 20, opacity: 0 });
+
+            const tl = gsap.timeline();
+            tl.to(signupModal, { opacity: 1, duration: 0.3, ease: 'power2.out' })
+              .to(modalContainer, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.2')
+              .to(formFields, { y: 0, opacity: 1, duration: 0.2, stagger: 0.08, ease: 'power2.out' }, '-=0.3');
+        }
+
+        // Close Client Modal with GSAP Animation
+        function closeModal() {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    signupModal.style.display = 'none';
+                    document.body.classList.remove('modal-open');
+                    // Reset form
+                    modalForm.reset();
+                    modalForm.style.display = 'flex';
+                    modalSuccessMessage.style.display = 'none';
+                    interestsError.style.display = 'none';
+                    // Restore title and subtitle
+                    signupModal.querySelector('.modal-title').style.display = '';
+                    signupModal.querySelector('.modal-subtitle').style.display = '';
+                }
+            });
+
+            tl.to(modalContainer, { scale: 0.9, opacity: 0, duration: 0.3, ease: 'power2.in' })
+              .to(signupModal, { opacity: 0, duration: 0.2, ease: 'power2.in' }, '-=0.1');
+        }
+
+        // Event Listeners for Client Modal
+        const clienteleSignupBtn = document.getElementById('clienteleSignupBtn');
+        clienteleSignupBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        modalClose.addEventListener('click', closeModal);
+
+        signupModal.addEventListener('click', (e) => {
+            if (e.target === signupModal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && signupModal.style.display === 'flex') {
+                closeModal();
+            }
+        });
+
+        // Validate Client Form
+        function validateModalForm() {
+            let isValid = true;
+
+            // Clear previous errors
+            interestsError.style.display = 'none';
+            document.querySelectorAll('.modal-input.error').forEach(input => {
+                input.classList.remove('error');
+            });
+
+            // Validate required text inputs
+            const requiredInputs = modalForm.querySelectorAll('.modal-input[required]');
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    isValid = false;
+                }
+            });
+
+            // Validate at least one interest checkbox
+            const checkboxes = modalForm.querySelectorAll('input[name="interests"]');
+            const atLeastOneChecked = Array.from(checkboxes).some(cb => cb.checked);
+
+            if (!atLeastOneChecked) {
+                interestsError.style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Handle Client Form Submission
+        modalForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validate form
+            if (!validateModalForm()) {
+                return;
+            }
+
+            // Disable submit button and show loading state
+            const submitButton = modalForm.querySelector('.modal-submit-button');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.classList.add('submitting');
+            submitButton.innerHTML = 'Submitting<span class="loading-spinner"></span>';
+
+            try {
+                // Collect form data
+                const formData = {
+                    formType: 'client',
+                    firstName: modalForm.firstName.value.trim(),
+                    email: modalForm.email.value.trim(),
+                    zipCode: modalForm.zipCode.value.trim(),
+                    age: modalForm.age.value.trim(),
+                    interests: Array.from(modalForm.querySelectorAll('input[name="interests"]:checked'))
+                        .map(cb => cb.value)
+                };
+
+                // Submit to Google Apps Script
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzAWauVbeaUKT3qeJ3JUJrlawddepISTmrC53ZsFsToKVGwckEu-6ewK6uGX0kR7_uVQg/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // Show success message and hide title/subtitle
+                modalForm.style.display = 'none';
+                modalSuccessMessage.style.display = 'block';
+                signupModal.querySelector('.modal-title').style.display = 'none';
+                signupModal.querySelector('.modal-subtitle').style.display = 'none';
+
+            } catch (error) {
+                console.error('Submission error:', error);
+                // Still show success in no-cors mode
+                modalForm.style.display = 'none';
+                modalSuccessMessage.style.display = 'block';
+                signupModal.querySelector('.modal-title').style.display = 'none';
+                signupModal.querySelector('.modal-subtitle').style.display = 'none';
+            } finally {
+                // Reset button state
+                submitButton.disabled = false;
+                submitButton.classList.remove('submitting');
+                submitButton.textContent = originalButtonText;
+            }
+        });
+    </script>
+</body>
+</html>
